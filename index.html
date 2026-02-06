@@ -453,6 +453,14 @@
       align-items: center;
     }
 
+    .work-item.pin-top {
+      align-items: start;
+    }
+
+    .modal-item.pin-top {
+      order: -1;
+    }
+
     .work-thumb {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -465,6 +473,15 @@
       gap: 4px;
     }
 
+    .work-title-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .work-title-link:hover {
+      text-decoration: underline;
+    }
+
     .work-link {
       color: #1f2b5f;
       font-weight: 700;
@@ -473,6 +490,163 @@
 
     .work-link:hover {
       text-decoration: underline;
+    }
+
+    .work-details {
+      margin-top: 6px;
+      border: 1px solid #c6d4f2;
+      border-radius: 8px;
+      background: #f7f9ff;
+      overflow: hidden;
+    }
+
+    .work-details summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 9px 10px;
+      font-weight: 700;
+      color: #1f2b5f;
+      list-style: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: #f1f5ff;
+    }
+
+    .work-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .work-details summary::after {
+      content: ">";
+      font-size: 0.95rem;
+      line-height: 1;
+      transition: transform 0.15s ease;
+    }
+
+    .work-details[open] summary {
+      border-bottom: 1px solid #d9e4fb;
+      background: #eef3ff;
+    }
+
+    .work-details[open] summary::after {
+      transform: rotate(90deg);
+    }
+
+    .ba-panel {
+      display: grid;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .ba-label {
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: #28407a;
+    }
+
+    .ba-albums {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+      gap: 6px;
+    }
+
+    .ba-album-card {
+      display: grid;
+      gap: 4px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .ba-album-cover {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #d4def5;
+    }
+
+    .ba-album-text {
+      display: block;
+      font-size: 0.72rem;
+      line-height: 1.2;
+      color: #2a3c73;
+      font-weight: 700;
+    }
+
+    .ba-songs {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 4px;
+      font-size: 0.85rem;
+    }
+
+    .ba-songs a {
+      color: #1f2b5f;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .ba-songs a:hover {
+      text-decoration: underline;
+    }
+
+    .ba-videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+    }
+
+    .ba-video {
+      display: grid;
+      gap: 4px;
+    }
+
+    .ba-video-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      border: 1px solid #d4def5;
+      background: #000;
+    }
+
+    .ba-video-title {
+      font-size: 0.74rem;
+      color: #2a3c73;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .ba-video-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .track-panel {
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .track-header {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #28407a;
+    }
+
+    .track-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 3px;
+      font-size: 0.8rem;
+      line-height: 1.25;
+      color: #2a3c73;
     }
 
     @media (max-width: 1080px) {
@@ -516,6 +690,14 @@
 
       .work-item {
         grid-template-columns: 1fr;
+      }
+
+      .ba-albums {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ba-videos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .doujin-row {
@@ -602,51 +784,188 @@
       </div>
       <div class="modal-grid">
         <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-iidx33-sparkleshower.jpg" alt="beatmania IIDX 33 Sparkle Shower artwork" />
+          <div class="work-body">
+            <strong><a class="work-title-link" href="https://p.eagate.573.jp/game/2dx/33/" target="_blank" rel="noopener noreferrer">beatmania IIDX 33 Sparkle Shower</a></strong>
+            <span>Regina vespaE (2025)</span>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-arcaea-acheron.webp" alt="Arcaea Acheron artwork" />
+          <div class="work-body">
+            <strong><a class="work-title-link" href="https://arcaea.lowiro.com/" target="_blank" rel="noopener noreferrer">Arcaea</a></strong>
+            <span>Acheron (2025)</span>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-iidx32-pinkycrush.jpg" alt="beatmania IIDX 32 Pinky Crush artwork" />
+          <div class="work-body">
+            <strong><a class="work-title-link" href="https://p.eagate.573.jp/game/2dx/32/" target="_blank" rel="noopener noreferrer">beatmania IIDX 32 Pinky Crush</a></strong>
+            <span>Mighty Cutie / u gotta beat (2024)</span>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-iidx31-epolis.jpg" alt="beatmania IIDX 31 EPOLIS artwork" />
+          <div class="work-body">
+            <strong><a class="work-title-link" href="https://p.eagate.573.jp/game/2dx/31/" target="_blank" rel="noopener noreferrer">beatmania IIDX 31 EPOLIS</a></strong>
+            <span>GloriosA (2023)</span>
+          </div>
+        </article>
+        <article class="modal-item work-item">
           <img class="work-thumb" src="./assets/gameworks-ez2on.webp" alt="EZ2ON REBOOT : R artwork" />
           <div class="work-body">
-            <strong>EZ2ON REBOOT : R</strong>
+            <strong><a class="work-title-link" href="https://store.steampowered.com/app/1477590/EZ2ON_REBOOT__R/" target="_blank" rel="noopener noreferrer">EZ2ON REBOOT : R</a></strong>
             <span>EZ2ON REBOOT : R - PRESTIGE PASS / KARUT - Cybernetic Geist (2022)</span>
-            <a class="work-link" href="https://store.steampowered.com/app/1477590/EZ2ON_REBOOT__R/" target="_blank" rel="noopener noreferrer">Open Link</a>
           </div>
         </article>
         <article class="modal-item work-item">
           <img class="work-thumb" src="./assets/gameworks-nikke.webp" alt="GODDESS OF VICTORY: NIKKE artwork" />
           <div class="work-body">
-            <strong>GODDESS OF VICTORY: NIKKE</strong>
+            <strong><a class="work-title-link" href="https://nikke-jp.com/" target="_blank" rel="noopener noreferrer">GODDESS OF VICTORY: NIKKE</a></strong>
             <span>BGM &amp; OST (2022)</span>
-            <a class="work-link" href="https://nikke-jp.com/" target="_blank" rel="noopener noreferrer">Open Link</a>
           </div>
         </article>
-        <article class="modal-item work-item">
+        <article class="modal-item work-item pin-top">
           <img class="work-thumb" src="./assets/gameworks-bluearchive.jpg" alt="Blue Archive artwork" />
           <div class="work-body">
-            <strong>BLUE ARCHIVE</strong>
-            <span>BGM &amp; OST (2021)</span>
-            <a class="work-link" href="https://bluearchive.jp/" target="_blank" rel="noopener noreferrer">Open Link</a>
+            <strong><a class="work-title-link" href="https://bluearchive.jp/" target="_blank" rel="noopener noreferrer">BLUE ARCHIVE</a></strong>
+            <span>BGM / OST / Character Songs (2021-2026)</span>
+            <details class="work-details">
+              <summary>Show Details</summary>
+              <div class="ba-panel">
+                <span class="ba-label">OST Albums (JP Release)</span>
+                <div class="ba-albums">
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-1-longing-for/1613862586" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol1.jpg" alt="Blue Archive Original Soundtrack Vol.1 cover" />
+                    <span class="ba-album-text">OST Vol.1 (2022)</span>
+                  </a>
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-2-searching-for/1633175206" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol2.jpg" alt="Blue Archive Original Soundtrack Vol.2 cover" />
+                    <span class="ba-album-text">OST Vol.2 (2022)</span>
+                  </a>
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-3-reaching-for/1665013930" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol3.jpg" alt="Blue Archive Original Soundtrack Vol.3 cover" />
+                    <span class="ba-album-text">OST Vol.3 (2023)</span>
+                  </a>
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-4-aiming-for-the/1697258767" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol4.jpg" alt="Blue Archive Original Soundtrack Vol.4 cover" />
+                    <span class="ba-album-text">OST Vol.4 (2023)</span>
+                  </a>
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-5-striving-for/1726120424" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol5.jpg" alt="Blue Archive Original Soundtrack Vol.5 cover" />
+                    <span class="ba-album-text">OST Vol.5 (2024)</span>
+                  </a>
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-6-keeping-for/1757552513" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol6.jpg" alt="Blue Archive Original Soundtrack Vol.6 cover" />
+                    <span class="ba-album-text">OST Vol.6 (2024)</span>
+                  </a>
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-7-harmonizing/1807216515" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol7.jpg" alt="Blue Archive Original Soundtrack Vol.7 cover" />
+                    <span class="ba-album-text">OST Vol.7 (2025)</span>
+                  </a>
+                  <a class="ba-album-card" href="https://music.apple.com/jp/album/blue-archive-original-soundtrack-vol-8-dreaming-for/1864085280" target="_blank" rel="noopener noreferrer">
+                    <img class="ba-album-cover" src="./assets/gameworks-bluearchive-ost-vol8.jpg" alt="Blue Archive Original Soundtrack Vol.8 cover" />
+                    <span class="ba-album-text">OST Vol.8 (2026)</span>
+                  </a>
+                </div>
+                <span class="ba-label">Character Songs</span>
+                <div class="ba-videos">
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=nLAtkP-SiEY" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/nLAtkP-SiEY/hqdefault.jpg" alt="一日一惡★レッツゴー！ thumbnail" />
+                      <span class="ba-video-title">一日一惡★レッツゴー！</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=MIFGEBmJGeY" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/MIFGEBmJGeY/hqdefault.jpg" alt="忍術研究部！只今参上！の巻。 thumbnail" />
+                      <span class="ba-video-title">忍術研究部！只今参上！の巻。</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://music.youtube.com/playlist?list=OLAK5uy_k65Ox55I_5oEdysRzFZE7giPEsYJtrhzQ" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://storage.nex-tone.link/variants/oivmj2nqv6xbnc6iy4d6i3ri8m6x/58ced8645b3590cbce39715a69f533062ca8cc552015349942d6fcfa04a99400" alt="Paint It Now official audio artwork" />
+                      <span class="ba-video-title">ブルーアーカイブ「Paint It Now」</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=-mYPRYl0Hhc" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/-mYPRYl0Hhc/hqdefault.jpg" alt="パフェダイアリーズ thumbnail" />
+                      <span class="ba-video-title">パフェダイアリーズ</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=hILMTy0UTDw" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/hILMTy0UTDw/hqdefault.jpg" alt="美食追求の道 ～いただきます！～ thumbnail" />
+                      <span class="ba-video-title">美食追求の道 ～いただきます！～</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=es7rgaAX-BE" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/es7rgaAX-BE/hqdefault.jpg" alt="一緒の約束 thumbnail" />
+                      <span class="ba-video-title">一緒の約束</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=i0PeHvBuNng" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/i0PeHvBuNng/hqdefault.jpg" alt="夜明けのコーヒーの香り thumbnail" />
+                      <span class="ba-video-title">夜明けのコーヒーの香り</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=TUDWnlyePv4" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/TUDWnlyePv4/hqdefault.jpg" alt="Twinkle☆Magic thumbnail" />
+                      <span class="ba-video-title">Twinkle☆Magic</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=40nRbwz7NTE" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/40nRbwz7NTE/hqdefault.jpg" alt="イマハカラメル ―Sweeten Up Later thumbnail" />
+                      <span class="ba-video-title">イマハカラメル ―Sweeten Up Later</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=1kjkh0svH4E" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/1kjkh0svH4E/hqdefault.jpg" alt="発明！ロマン！Engineer Dream！！ thumbnail" />
+                      <span class="ba-video-title">発明！ロマン！Engineer Dream！！</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=nkqQmYQqEfs" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/nkqQmYQqEfs/hqdefault.jpg" alt="温度 thumbnail" />
+                      <span class="ba-video-title">温度</span>
+                    </a>
+                  </div>
+                  <div class="ba-video">
+                    <a class="ba-video-link" href="https://www.youtube.com/watch?v=sxPOS_8JYPc" target="_blank" rel="noopener noreferrer">
+                      <img class="ba-video-thumb" src="https://i.ytimg.com/vi/sxPOS_8JYPc/hqdefault.jpg" alt="出発進行！ハイランダー！！ thumbnail" />
+                      <span class="ba-video-title">出発進行！ハイランダー！！</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </details>
           </div>
         </article>
         <article class="modal-item work-item">
           <img class="work-thumb" src="./assets/gameworks-dancerush.webp" alt="DANCERUSH STARDOM artwork" />
           <div class="work-body">
-            <strong>DANCERUSH STARDOM</strong>
+            <strong><a class="work-title-link" href="https://p.eagate.573.jp/game/dan/1st/top/entrance.html?___REDIRECT=1" target="_blank" rel="noopener noreferrer">DANCERUSH STARDOM</a></strong>
             <span>SPARK FESTIVAL 2021 / KARUT - NEW SOLUTION (2021)</span>
-            <a class="work-link" href="https://p.eagate.573.jp/game/dan/1st/top/entrance.html?___REDIRECT=1" target="_blank" rel="noopener noreferrer">Open Link</a>
           </div>
         </article>
         <article class="modal-item work-item">
           <img class="work-thumb" src="./assets/gameworks-sixtar.webp" alt="Sixtar Gate STARTRAIL artwork" />
           <div class="work-body">
-            <strong>Sixtar Gate: STARTRAIL</strong>
+            <strong><a class="work-title-link" href="https://store.steampowered.com/app/1802720/_/" target="_blank" rel="noopener noreferrer">Sixtar Gate: STARTRAIL</a></strong>
             <span>KARUT - NeosbladE / Azure Eyez / Shining Aquarius / One Way Drive / STARGATE EXTREM / Replay &amp; Action</span>
-            <a class="work-link" href="https://store.steampowered.com/app/1802720/_/" target="_blank" rel="noopener noreferrer">Open Link</a>
           </div>
         </article>
         <article class="modal-item work-item">
           <img class="work-thumb" src="./assets/gameworks-dynamix.jpg" alt="Dynamix artwork" />
           <div class="work-body">
-            <strong>Dynamix</strong>
+            <strong><a class="work-title-link" href="https://play.google.com/store/apps/details?id=com.c4cat.dynamix" target="_blank" rel="noopener noreferrer">Dynamix</a></strong>
             <span>KARUT - Hyperspace Jump (2021)</span>
-            <a class="work-link" href="https://play.google.com/store/apps/details?id=com.c4cat.dynamix" target="_blank" rel="noopener noreferrer">Open Link</a>
           </div>
         </article>
       </div>
@@ -666,13 +985,51 @@
         <article class="modal-item work-item">
           <img class="work-thumb" src="./assets/discography-expensive-vol1.jpg" alt="This is Really Expensive Vol.1 cover" />
           <div class="work-body">
-            <strong>This is Really Expensive Vol.1</strong>
+            <strong><a class="work-title-link" href="https://drive.google.com/file/d/1jjmY7VZXg9jSeLc_1QCK3Un2YIdqw9PG/view" target="_blank" rel="noopener noreferrer">This is Really Expensive Vol.1</a></strong>
+            <details class="work-details">
+              <summary>Info</summary>
+              <div class="track-panel">
+                <span class="track-header">- TRACK LIST -</span>
+                <ol class="track-list">
+                  <li>KARUMI VS ShirokaraS - CANDY X LOVE X MAGIC</li>
+                  <li>KARUT - HiTΛGI</li>
+                  <li>KARUT - BE HERE NOW</li>
+                  <li>KARUT - ROCK IT</li>
+                  <li>KARUT - SAVE YOU (2K15REWORK)</li>
+                  <li>KARUT - ERIRI</li>
+                  <li>KARUT - Flower Breeze</li>
+                  <li>KARUT - Wings of Time</li>
+                  <li>Plutian - Sakura (KARUT J-CORE REMIX)</li>
+                </ol>
+              </div>
+            </details>
           </div>
         </article>
         <article class="modal-item work-item">
           <img class="work-thumb" src="./assets/discography-expensive-vol2.png" alt="This is VERY Expensive Vol.2 cover" />
           <div class="work-body">
-            <strong>This is VERY Expensive Vol.2</strong>
+            <strong><a class="work-title-link" href="https://drive.google.com/file/d/1VUpasocdUnVAhpYAP3YD3B61HWgQuDeo/view" target="_blank" rel="noopener noreferrer">This is VERY Expensive Vol.2</a></strong>
+            <details class="work-details">
+              <summary>Info</summary>
+              <div class="track-panel">
+                <span class="track-header">- TRACK LIST -</span>
+                <ol class="track-list">
+                  <li>Missing in Action</li>
+                  <li>(You) Make Me Feel Alive</li>
+                  <li>Neon Seoul</li>
+                  <li>LOVΣ-TΣC</li>
+                  <li>Night DrivE</li>
+                  <li>Polygon LOVE</li>
+                  <li>SETENYSOFT2800</li>
+                  <li>Pixelated Memories</li>
+                  <li>DOKKAEBI</li>
+                  <li>KaTaNa Soul</li>
+                  <li>Spiral Rider</li>
+                  <li>あなただけ聞くことができる小さなボリュ?ムで...</li>
+                  <li>(Bonus Track) Up All Night Friday</li>
+                </ol>
+              </div>
+            </details>
           </div>
         </article>
         <article class="modal-item">
@@ -696,12 +1053,6 @@
         <button class="close-btn" data-close>CLOSE</button>
       </div>
       <div class="modal-grid doujin-grid">
-        <article class="modal-item doujin-item">
-          <h3 class="doujin-year">- 2026 -</h3>
-          <ul class="doujin-list">
-            <li class="doujin-row"><span class="doujin-date">02.06</span><span class="doujin-label">testgroup</span>- testsong</li>
-          </ul>
-        </article>
         <article class="modal-item doujin-item">
           <h3 class="doujin-year">- 2022 -</h3>
           <ul class="doujin-list">
