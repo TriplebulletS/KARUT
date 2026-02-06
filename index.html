@@ -1,0 +1,901 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KARUT Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:ital,wght@1,700;1,800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #00a0d5;
+      --highlight: #f2ca00;
+      --highlight-2: #ff8c6b;
+      --menu-blue: #007fb8;
+      --menu-dark: #1f2430;
+      --deep: #1d2c59;
+      --ink: #0f1830;
+      --menu-text: #e2ecfa;
+      --menu-hover-text: #ff9b84;
+      --name-text: #22306d;
+      --meta-text: #1f3478;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.08)),
+        url("./assets/portfolio-bg.png") center/cover no-repeat fixed,
+        #00a0d5;
+      color: var(--ink);
+      font-family: "Outfit", sans-serif;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 2.4vw, 28px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-pattern {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: -20px;
+      width: 165vw;
+      transform: translateX(-12vw);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .footer-pattern img {
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0.9;
+      image-rendering: auto;
+      filter: blur(0.2px);
+    }
+
+    .sns-dock {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      display: flex;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .sns-link {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      box-shadow: none;
+      border-radius: 0;
+      transition: transform 120ms ease, opacity 120ms ease;
+    }
+
+    .sns-link:hover,
+    .sns-link:focus-visible {
+      transform: translateY(-2px);
+      opacity: 0.85;
+      outline: none;
+    }
+
+    .sns-link img {
+      width: 18px;
+      height: 18px;
+      display: block;
+      filter: grayscale(1) brightness(0) invert(1);
+    }
+
+    .frame {
+      width: min(1420px, 100%);
+      display: grid;
+      grid-template-columns: minmax(340px, 43%) minmax(420px, 57%);
+      gap: clamp(14px, 2vw, 26px);
+      align-items: start;
+    }
+
+    .menu-panel {
+      display: grid;
+      align-content: start;
+      grid-auto-rows: max-content;
+      gap: 6px;
+      margin-top: 0;
+      align-self: center;
+    }
+
+    .menu-item {
+      width: 100%;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      border: none;
+      outline: none;
+      background: #1b7ea7;
+      color: var(--menu-text);
+      text-align: left;
+      padding: 0 16px;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 3.85rem;
+      font-weight: 800;
+      font-style: italic;
+      line-height: 1;
+      letter-spacing: 0.012em;
+      text-transform: uppercase;
+      box-shadow: 0 1px 3px rgba(6, 22, 46, 0.52);
+      text-decoration: none;
+      cursor: default;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border-radius: 0;
+      transform: skewX(-17deg);
+      transform-origin: left center;
+    }
+
+    .menu-label {
+      display: inline-block;
+      transform: skewX(0deg) scaleY(1.14);
+      transform-origin: left center;
+    }
+
+    .menu-item.action {
+      cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease, box-shadow 120ms ease;
+    }
+
+    .menu-item.action:hover,
+    .menu-item.action:focus-visible {
+      background: var(--menu-dark);
+      color: var(--menu-hover-text);
+      transform: skewX(-17deg) translateX(3px);
+      box-shadow: 0 1px 3px rgba(6, 22, 46, 0.52);
+      outline: none;
+    }
+
+    .content-panel {
+      position: relative;
+      padding: clamp(24px, 3vw, 40px);
+      background: transparent;
+      overflow: hidden;
+      display: grid;
+      align-content: start;
+      justify-items: center;
+      gap: 4px;
+      padding-top: clamp(10px, 1.6vw, 20px);
+      margin-top: -28px;
+    }
+
+    .logo-cloud {
+      width: min(330px, 72%);
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      z-index: 1;
+      overflow: hidden;
+      margin-top: -6px;
+      margin-bottom: -20px;
+    }
+
+    .logo-cloud img {
+      width: 100%;
+      max-width: none;
+      margin: -38px 0 -34px;
+      display: block;
+      filter: none;
+    }
+
+    .name-tag {
+      z-index: 1;
+      background: var(--highlight-2);
+      color: var(--name-text);
+      font-family: "Anton", sans-serif;
+      font-size: clamp(1.9rem, 4.1vw, 3.3rem);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      padding: 10px 22px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .meta {
+      z-index: 1;
+      display: grid;
+      gap: 4px;
+      justify-items: center;
+      margin-top: 4px;
+    }
+
+    .meta-line {
+      display: inline-block;
+      background: var(--highlight);
+      color: var(--meta-text);
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: clamp(1.9rem, 3.1vw, 3.2rem);
+      font-style: italic;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: none;
+      padding: 2px 22px 4px;
+      line-height: 1;
+    }
+
+    .meta-line a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .meta-line a:hover {
+      text-decoration: underline;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(5, 20, 45, 0.75);
+      z-index: 20;
+      padding: 16px;
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-panel {
+      width: min(880px, 100%);
+      max-height: 88vh;
+      overflow: auto;
+      background: #f6fbff;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+      padding: 14px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      margin: 0;
+      background: var(--highlight-2);
+      color: #1f2a57;
+      font-family: "Anton", sans-serif;
+      font-size: clamp(1.6rem, 3.8vw, 2.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      padding: 8px 14px;
+      text-transform: uppercase;
+    }
+
+    #works-modal .modal-title,
+    #doujin-modal .modal-title,
+    #disco-modal .modal-title,
+    #event-modal .modal-title,
+    #shop-modal .modal-title {
+      font-family: "Barlow Condensed", sans-serif !important;
+      font-style: italic !important;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      transform: skewX(-12deg);
+      transform-origin: left center;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--highlight-2);
+      color: #1f2b5f;
+      padding: 4px 10px;
+      line-height: 1;
+    }
+
+    .close-btn {
+      border: none;
+      background: var(--highlight);
+      color: #1d2c59;
+      font-family: "Barlow Condensed", sans-serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 800;
+      padding: 6px 14px;
+      cursor: pointer;
+    }
+
+    .modal-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .modal-item {
+      background: #ffffff;
+      padding: 10px 12px;
+      box-shadow: 0 2px 10px rgba(16, 34, 66, 0.12);
+    }
+
+    .modal-item strong {
+      display: block;
+      font-family: "Anton", sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 0.02em;
+      color: #1f2b5f;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .modal-item span {
+      font-size: 1.06rem;
+      color: #2f3962;
+    }
+
+    #works-modal .modal-panel,
+    #doujin-modal .modal-panel,
+    #disco-modal .modal-panel,
+    #event-modal .modal-panel,
+    #shop-modal .modal-panel {
+      background: #d8e4ee;
+    }
+
+    #works-modal .modal-item,
+    #doujin-modal .modal-item,
+    #disco-modal .modal-item,
+    #event-modal .modal-item,
+    #shop-modal .modal-item {
+      background: #e5edf4;
+    }
+
+    .doujin-grid {
+      gap: 10px;
+    }
+
+    .doujin-item {
+      display: grid;
+      gap: 8px;
+    }
+
+    .doujin-year {
+      display: inline-flex;
+      width: fit-content;
+      justify-self: start;
+      background: #ef8f76;
+      color: #32363f;
+      font-family: "Anton", sans-serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.06;
+      letter-spacing: 0.02em;
+      padding: 4px 8px;
+      margin: 0;
+    }
+
+    .doujin-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 6px;
+    }
+
+    .doujin-row {
+      font-family: "Outfit", sans-serif;
+      font-size: 1.06rem;
+      line-height: 1.35;
+      letter-spacing: 0;
+      color: #3e444d;
+      font-weight: 700;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    .doujin-date {
+      display: inline-block;
+      width: 64px;
+      margin-right: 8px;
+      color: inherit;
+      font-weight: 700;
+    }
+
+    .doujin-label {
+      display: inline-block;
+      background: #c8d5e7;
+      color: #1f2b5f !important;
+      -webkit-text-fill-color: #1f2b5f;
+      font-weight: 700;
+      text-shadow: none;
+      padding: 1px 8px 2px;
+      margin-right: 6px;
+      border-radius: 2px;
+    }
+
+    .modal-item .doujin-role {
+      color: #35507f;
+      font-weight: 800;
+    }
+
+    .event-sub {
+      display: inline-block;
+      margin-left: 72px;
+    }
+
+    #event-modal .doujin-date {
+      width: 94px;
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .work-body {
+      display: grid;
+      gap: 4px;
+    }
+
+    .work-link {
+      color: #1f2b5f;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .work-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 1080px) {
+      .frame {
+        grid-template-columns: minmax(260px, 42%) minmax(280px, 58%);
+      }
+
+      .menu-panel {
+        align-self: center;
+      }
+
+      .content-panel {
+        margin-top: -16px;
+      }
+
+      .menu-item {
+        height: 64px;
+        font-size: 3.3rem;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .frame {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-panel {
+        align-self: start;
+        order: 2;
+      }
+
+      .content-panel {
+        margin-top: 0;
+        order: 1;
+      }
+
+      .menu-item {
+        height: 58px;
+        font-size: 2.8rem;
+      }
+
+      .work-item {
+        grid-template-columns: 1fr;
+      }
+
+      .doujin-row {
+        white-space: normal;
+      }
+
+      .doujin-date {
+        width: 60px;
+      }
+
+      .sns-dock {
+        left: 10px;
+        bottom: 10px;
+        gap: 6px;
+      }
+
+      .sns-link {
+        width: 30px;
+        height: 30px;
+      }
+
+      .sns-link img {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="frame">
+      <section class="menu-panel" aria-label="main menu">
+        <button type="button" class="menu-item action" data-modal="works-modal"><span class="menu-label">WORKS</span></button>
+        <button type="button" class="menu-item action" data-modal="doujin-modal"><span class="menu-label">DOUJIN WORKS</span></button>
+        <button type="button" class="menu-item action" data-modal="disco-modal"><span class="menu-label">DISCOGRAPHY</span></button>
+        <button type="button" class="menu-item action" data-modal="event-modal"><span class="menu-label">EVENT</span></button>
+        <button type="button" class="menu-item action" data-modal="shop-modal"><span class="menu-label">SHOP</span></button>
+      </section>
+
+      <section class="content-panel">
+        <div class="logo-cloud">
+          <img src="./assets/karut-logo.png" alt="KARUT logo" />
+        </div>
+        <h1 class="name-tag">KARUT</h1>
+        <div class="meta">
+          <div class="meta-line">Composer &amp; DJ</div>
+          <div class="meta-line">South Korean</div>
+          <div class="meta-line">
+            <a href="mailto:crowa121350@gmail.com">crowa121350@gmail.com</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="footer-pattern" aria-hidden="true">
+    <img src="./assets/karut-bottom-pattern.svg" alt="" />
+  </div>
+  <nav class="sns-dock" aria-label="SNS links">
+    <a class="sns-link" href="https://www.youtube.com/channel/UC8EVaDH23msdXamsSAMdx8w" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+      <img src="./assets/sns-youtube.svg" alt="" />
+    </a>
+    <a class="sns-link" href="https://soundcloud.com/k_arut" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud">
+      <img src="./assets/sns-soundcloud.svg" alt="" />
+    </a>
+    <a class="sns-link" href="https://x.com/TriplebulletS" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <img src="./assets/sns-x.svg" alt="" />
+    </a>
+    <a class="sns-link" href="https://www.instagram.com/triplebulle7s/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <img src="./assets/sns-instagram.svg" alt="" />
+    </a>
+    <a class="sns-link" href="https://open.spotify.com/artist/2RVXnU56kIClg1UbAW9ehz?si=cgnlzdSiR0-wwpvAN8xTQQ&nd=1&dlsi=18afd52722a34405" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+      <img src="./assets/sns-spotify.svg" alt="" />
+    </a>
+    <a class="sns-link" href="https://karut.bandcamp.com/" target="_blank" rel="noopener noreferrer" aria-label="Bandcamp">
+      <img src="./assets/sns-bandcamp.svg" alt="" />
+    </a>
+  </nav>
+
+  <div class="modal" id="works-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="works-title">
+      <div class="modal-head">
+        <h2 class="modal-title" id="works-title">WORKS</h2>
+        <button class="close-btn" data-close>CLOSE</button>
+      </div>
+      <div class="modal-grid">
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-ez2on.webp" alt="EZ2ON REBOOT : R artwork" />
+          <div class="work-body">
+            <strong>EZ2ON REBOOT : R</strong>
+            <span>EZ2ON REBOOT : R - PRESTIGE PASS / KARUT - Cybernetic Geist (2022)</span>
+            <a class="work-link" href="https://store.steampowered.com/app/1477590/EZ2ON_REBOOT__R/" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-nikke.webp" alt="GODDESS OF VICTORY: NIKKE artwork" />
+          <div class="work-body">
+            <strong>GODDESS OF VICTORY: NIKKE</strong>
+            <span>BGM &amp; OST (2022)</span>
+            <a class="work-link" href="https://nikke-jp.com/" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-bluearchive.jpg" alt="Blue Archive artwork" />
+          <div class="work-body">
+            <strong>BLUE ARCHIVE</strong>
+            <span>BGM &amp; OST (2021)</span>
+            <a class="work-link" href="https://bluearchive.jp/" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-dancerush.webp" alt="DANCERUSH STARDOM artwork" />
+          <div class="work-body">
+            <strong>DANCERUSH STARDOM</strong>
+            <span>SPARK FESTIVAL 2021 / KARUT - NEW SOLUTION (2021)</span>
+            <a class="work-link" href="https://p.eagate.573.jp/game/dan/1st/top/entrance.html?___REDIRECT=1" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-sixtar.webp" alt="Sixtar Gate STARTRAIL artwork" />
+          <div class="work-body">
+            <strong>Sixtar Gate: STARTRAIL</strong>
+            <span>KARUT - NeosbladE / Azure Eyez / Shining Aquarius / One Way Drive / STARGATE EXTREM / Replay &amp; Action</span>
+            <a class="work-link" href="https://store.steampowered.com/app/1802720/_/" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/gameworks-dynamix.jpg" alt="Dynamix artwork" />
+          <div class="work-body">
+            <strong>Dynamix</strong>
+            <span>KARUT - Hyperspace Jump (2021)</span>
+            <a class="work-link" href="https://play.google.com/store/apps/details?id=com.c4cat.dynamix" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="disco-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="disco-title">
+      <div class="modal-head">
+        <h2 class="modal-title" id="disco-title">DISCOGRAPHY</h2>
+        <button class="close-btn" data-close>CLOSE</button>
+      </div>
+      <div class="modal-grid">
+        <article class="modal-item">
+          <strong><span class="section-tag">ALBUM</span></strong>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/discography-expensive-vol1.jpg" alt="This is Really Expensive Vol.1 cover" />
+          <div class="work-body">
+            <strong>This is Really Expensive Vol.1</strong>
+          </div>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/discography-expensive-vol2.png" alt="This is VERY Expensive Vol.2 cover" />
+          <div class="work-body">
+            <strong>This is VERY Expensive Vol.2</strong>
+          </div>
+        </article>
+        <article class="modal-item">
+          <strong><span class="section-tag">SINGLE &amp; EP</span></strong>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/discography-single-ep.png" alt="Single and EP cover" />
+          <div class="work-body">
+            <strong>SINGLE &amp; EP</strong>
+            <a class="work-link" href="https://karut.bandcamp.com/" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="doujin-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="doujin-title">
+      <div class="modal-head">
+        <h2 class="modal-title" id="doujin-title">DOUJIN WORKS</h2>
+        <button class="close-btn" data-close>CLOSE</button>
+      </div>
+      <div class="modal-grid doujin-grid">
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2022 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">02.28</span><span class="doujin-label">TERRAGAZER</span>- TERRA-FORMING 2</li>
+            <li class="doujin-row"><span class="doujin-date">03.26</span><span class="doujin-label">Dennou.wav</span>- ELECTRIC SYNDROME</li>
+            <li class="doujin-row"><span class="doujin-date">04.24</span><span class="doujin-label">Diverse System</span>- works.12</li>
+            <li class="doujin-row"><span class="doujin-date">06.28</span><span class="doujin-label">TERRAGAZER</span>- TERRA'N'BASS</li>
+            <li class="doujin-row"><span class="doujin-date">08.13</span><span class="doujin-label">Diverse System</span>- AD : HOUSE 10</li>
+            <li class="doujin-row"><span class="doujin-date">08.31</span><span class="doujin-label">MOTTO MUSIC</span>- Change. [Limited Edition] / <span class="doujin-role">Remixer</span></li>
+            <li class="doujin-row"><span class="doujin-date">10.30</span><span class="doujin-label">Emoism Records</span>- RiraN - Nobody Face Love / <span class="doujin-role">Remixer</span></li>
+            <li class="doujin-row"><span class="doujin-date">10.30</span><span class="doujin-label">MEGAREX</span>- TECHCORE EVANGELIX 03</li>
+            <li class="doujin-row"><span class="doujin-date">10.30</span><span class="doujin-label">Next Reflection</span>- URBANLIGHTS HARDSOUND 3</li>
+            <li class="doujin-row"><span class="doujin-date">10.30</span><span class="doujin-label">GRND0</span>- &#12302;&#38646;&#21205;&#12303;</li>
+            <li class="doujin-row"><span class="doujin-date">10.27</span><span class="doujin-label">MOTTO MUSIC</span>- image. [Limited Edition] / <span class="doujin-role">Remixer</span></li>
+            <li class="doujin-row"><span class="doujin-date">12.30</span><span class="doujin-label">Diverse System</span>- AD : HOUSE Winter 3</li>
+            <li class="doujin-row"><span class="doujin-date">12.30</span><span class="doujin-label">#ffffff Records</span>- AR forest - Deep Inside / <span class="doujin-role">Composer</span></li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2021 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">06.10</span><span class="doujin-label">TERRAGAZER</span>- TERRAVASION</li>
+            <li class="doujin-row"><span class="doujin-date">08.20</span><span class="doujin-label">MEGAREX</span>- DAZZLE</li>
+            <li class="doujin-row"><span class="doujin-date">08.20</span><span class="doujin-label">Diverse System</span>- AD : HOUSE9</li>
+            <li class="doujin-row"><span class="doujin-date">10.31</span><span class="doujin-label">Ayamati-Records</span>- Getting Break 3</li>
+            <li class="doujin-row"><span class="doujin-date">11.26</span><span class="doujin-label">TERRAGAZER</span>- TERRANCE</li>
+            <li class="doujin-row"><span class="doujin-date">12.25</span><span class="doujin-label">MAD MIND MACHINE</span>- DoujinMusicMaker.com / <span class="doujin-role">Composer</span></li>
+            <li class="doujin-row"><span class="doujin-date">12.28</span><span class="doujin-label">Dennou.wav</span>- SMOOZ DISCO</li>
+            <li class="doujin-row"><span class="doujin-date">12.31</span><span class="doujin-label">Diverse System</span>- AD : HOUSE Winter 2</li>
+            <li class="doujin-row"><span class="doujin-date">12.31</span><span class="doujin-label">MEGAREX</span>- HYPER EVANGALIX</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2020 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">03.01</span><span class="doujin-label">MEGAREX</span>- FUGENE 04</li>
+            <li class="doujin-row"><span class="doujin-date">03.01</span><span class="doujin-label">MEGAREX</span>- Jersey club Re:Bible 01</li>
+            <li class="doujin-row"><span class="doujin-date">04.28</span><span class="doujin-label">MEGAREX</span>- TechCore Evangelix 02</li>
+            <li class="doujin-row"><span class="doujin-date">04.28</span><span class="doujin-label">MEGAREX</span>- NRG NU ERA 2020</li>
+            <li class="doujin-row"><span class="doujin-date">06.24</span><span class="doujin-label">TERRAGAZER</span>- TERRA-FORMING</li>
+            <li class="doujin-row"><span class="doujin-date">07.11</span><span class="doujin-label">MAD MIND MACHINE</span>- X</li>
+            <li class="doujin-row"><span class="doujin-date">10.25</span><span class="doujin-label">MEGAREX</span>- Beyond core EVANGELIX 02</li>
+            <li class="doujin-row"><span class="doujin-date">12.25</span><span class="doujin-label">TERRAGAZER</span>- GIFTBOX</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2019 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">04.12</span><span class="doujin-label">TOMOMO RECORDS</span>- KATOMORI - Dear Remixes / <span class="doujin-role">Remixer</span></li>
+            <li class="doujin-row"><span class="doujin-date">04.28</span><span class="doujin-label">Ayamati-Records</span>- Getting Break 2</li>
+            <li class="doujin-row"><span class="doujin-date">12.31</span><span class="doujin-label">MEGAREX</span>- Beyondcore EVANGELIX</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2018 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">02.14</span><span class="doujin-label">NOISESTROKE</span>- Above The World ll</li>
+            <li class="doujin-row"><span class="doujin-date">04.24</span><span class="doujin-label">Riparia Records</span>- COLORS</li>
+            <li class="doujin-row"><span class="doujin-date">06.17</span><span class="doujin-label">MAD MIND MACHINE</span>- piece e.p</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2015 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">08.22</span><span class="doujin-label">NOISESTROKE</span>- Above The World</li>
+            <li class="doujin-row"><span class="doujin-date">08.29</span><span class="doujin-label">HYPERMESS Recordings</span>- EZ2AC REMIX PROJECT - SPACE -</li>
+            <li class="doujin-row"><span class="doujin-date">12.15</span><span class="doujin-label">HYPERMESS Recordings</span>- MESS-GAME Vol.4</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2014 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">12.29</span><span class="doujin-label">HYPERMESS Recordings</span>- MESS-GAME Vol.3</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="shop-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="shop-title">
+      <div class="modal-head">
+        <h2 class="modal-title" id="shop-title">SHOP</h2>
+        <button class="close-btn" data-close>CLOSE</button>
+      </div>
+      <div class="modal-grid">
+        <article class="modal-item">
+          <strong><span class="section-tag">SHOP</span></strong>
+        </article>
+        <article class="modal-item work-item">
+          <img class="work-thumb" src="./assets/shop-vital-preset-vol1.jpg" alt="KARUT Vital Preset Vol.1 cover" />
+          <div class="work-body">
+            <strong>KARUT Vital Preset Vol.1</strong>
+            <a class="work-link" href="https://triplebullets.gumroad.com/l/kvprts" target="_blank" rel="noopener noreferrer">Open Link</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="event-modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="event-title">
+      <div class="modal-head">
+        <h2 class="modal-title" id="event-title">EVENT</h2>
+        <button class="close-btn" data-close>CLOSE</button>
+      </div>
+      <div class="modal-grid doujin-grid">
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2022 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">04.24</span><span class="doujin-label">Type R Seoul</span>- Party TYPE R</li>
+            <li class="doujin-row"><span class="doujin-date">06.11</span><span class="doujin-label">WINDY</span>- cawfeemix 3rd anniversary</li>
+            <li class="doujin-row"><span class="doujin-date">06.24</span><span class="doujin-label">音;ME</span>- 音;ME Night 2</li>
+            <li class="doujin-row"><span class="doujin-date">09.03</span><span class="doujin-label">Emoism Records</span>- Emoism Gathering 2022</li>
+            <li class="doujin-row"><span class="doujin-date">12.03 ~ 04</span><span class="doujin-label">AGF Korea</span>- AGF KOREA 2022 Blue Archive Party DJ</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2021 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">04.15</span><span class="doujin-label">Super Speedrun Marathon</span>- SSM2021</li>
+            <li class="doujin-row"><span class="doujin-date">07.30</span><span class="doujin-label">CLUB COLOR</span>- CLUB COLOR Vol.10 2Day Fes</li>
+            <li class="doujin-row"><span class="doujin-date">11.27</span><span class="doujin-label">aiobahn</span>- overture vol. 1</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2020 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">03.01</span><span class="doujin-label">MidnightSnacks</span>- 1-800-BUY-SNAX: Long Distance</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2018 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">10.26</span><span class="doujin-label">#OTACOS x FUTURE EXPLORER</span>-<br><span class="event-sub">HALLOWEEN SPECIAL NIGHT</span></li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2016 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">02.18</span><span class="doujin-label">DASAN SOFT</span>- 2.5D EMULATOR</li>
+            <li class="doujin-row"><span class="doujin-date">05.20</span><span class="doujin-label">DASANSOFT</span>- GOTTA GO FAST</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2015 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">03.08</span><span class="doujin-label">Synthikate</span>- NOISESTROKE2</li>
+            <li class="doujin-row"><span class="doujin-date">07.04</span><span class="doujin-label">DASAN SOFT</span>- KOMBAT COIN INVADER NIGHT 5100</li>
+            <li class="doujin-row"><span class="doujin-date">08.22</span><span class="doujin-label">DASAN SOFT</span>- KOMBAT COIN INVADER NIGHT 5100 #2</li>
+          </ul>
+        </article>
+        <article class="modal-item doujin-item">
+          <h3 class="doujin-year">- 2014 -</h3>
+          <ul class="doujin-list">
+            <li class="doujin-row"><span class="doujin-date">10.19</span><span class="doujin-label">Synthikate</span>- NOISESTROKE</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const openButtons = document.querySelectorAll("[data-modal]");
+    const closeButtons = document.querySelectorAll("[data-close]");
+    const modals = document.querySelectorAll(".modal");
+
+    function closeAllModals() {
+      modals.forEach((modal) => {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+      });
+      document.body.style.overflow = "";
+    }
+
+    openButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-modal");
+        const modal = document.getElementById(targetId);
+        if (!modal) return;
+        closeAllModals();
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", closeAllModals);
+    });
+
+    modals.forEach((modal) => {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeAllModals();
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeAllModals();
+    });
+  </script>
+</body>
+</html>
